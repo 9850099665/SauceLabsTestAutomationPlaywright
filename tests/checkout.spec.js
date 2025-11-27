@@ -23,9 +23,9 @@ test('User logins with test credentials, adds products to cart with 3 random ite
 
   await cart.proceedToCheckout();
   await checkout.fillCheckoutDetails(
-    testData.customer.firstName,
-    testData.customer.lastName,
-    testData.customer.postalCode
+    testData.customerCheckoutDetails.firstName,
+    testData.customerCheckoutDetails.lastName,
+    testData.customerCheckoutDetails.postalCode
   );
 
   await overview.completeCheckout();

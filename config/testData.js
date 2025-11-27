@@ -7,8 +7,8 @@ export const credentials = {
 
 export const password = "secret_sauce";
 
-export const customer = {
-  firstName: "John",
-  lastName: "Doe",
-  postalCode: "12345"
+export const customerCheckoutDetails = {
+  firstName: "Sujay",
+  lastName: "Naik",
+  postalCode: "411021"
 };
