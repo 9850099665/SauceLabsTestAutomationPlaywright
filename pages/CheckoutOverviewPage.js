@@ -11,6 +11,6 @@ export class CheckoutOverviewPage {
   }
 
   async verifyConfirmation() {
-    await expect(this.page.locator('.complete-header')).toHaveText('THANK YOU FOR YOUR ORDER');
+    await expect(this.page.locator('.complete-header')).toHaveText('Thank you for your order!');
   }
 }
