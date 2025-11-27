@@ -9,8 +9,8 @@ export class ProductsPage {
     const randomItems = items.sort(() => 0.5 - Math.random()).slice(0, count);
 
     for (const item of randomItems) {
-      //await item.locator('button:has-text("Add to cart")').click();
-      await this.item.locator('button:has-text("Add to cart")').click();
+      await item.locator('button:has-text("Add to cart")').click();
+      //await this.item.locator('button:has-text("Add to cart")').click();
     }
   }
 
