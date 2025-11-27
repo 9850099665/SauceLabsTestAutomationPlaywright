@@ -1,4 +1,6 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
+const testData = require('../config/testData');
+const constants = require('../config/constants');
 const { LoginPage } = require('../pages/LoginPage');
 const { ProductsPage } = require('../pages/ProductsPage');
 const { CartPage } = require('../pages/CartPage');
@@ -12,15 +14,28 @@ test('User logins with test credentials, adds products to cart with 3 random ite
   const checkout = new CheckoutPage(page);
   const overview = new CheckoutOverviewPage(page);
 
-  await page.goto('https://www.saucedemo.com/');
-  await login.login('standard_user', 'secret_sauce');
+  await page.goto(testData.BASE_URL);
+  await login.login(testData.credentials.username_standard_user, testData.password);
+  await login.verifyLoginSuccess();
 
   await products.addRandomItems(3);
   await products.goToCart();
 
   await cart.proceedToCheckout();
-  await checkout.fillCheckoutDetails('John', 'Doe', '12345');
+  await checkout.fillCheckoutDetails(
+    testData.customer.firstName,
+    testData.customer.lastName,
+    testData.customer.postalCode
+  );
 
   await overview.completeCheckout();
   await overview.verifyConfirmation();
+});
+
+test('Locked out user should not be able to login', async ({ page }) => {
+  const login = new LoginPage(page);
+
+  await page.goto(testData.BASE_URL);
+  await login.login(testData.credentials.username_locked_out_user, testData.password);
+  await login.assertLoginFailure(constants.messages.loginFailureMessageLockedOutUser);
 });
