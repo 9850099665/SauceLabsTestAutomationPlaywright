@@ -1,11 +1,13 @@
 import { test } from '@playwright/test';
 const testData = require('../config/testData');
 const constants = require('../config/constants');
-const { LoginPage } = require('../pages/LoginPage');
-const { ProductsPage } = require('../pages/ProductsPage');
-const { CartPage } = require('../pages/CartPage');
-const { CheckoutPage } = require('../pages/CheckoutPage');
-const { CheckoutOverviewPage } = require('../pages/CheckoutOverviewPage');
+import {
+  LoginPage,
+  ProductsPage,
+  CartPage,
+  CheckoutPage,
+  CheckoutOverviewPage
+} from '../pages/index.js';
 
 test('User logins with test credentials, adds products to cart with 3 random items and checkouts', async ({ page }) => {
   const login = new LoginPage(page);
