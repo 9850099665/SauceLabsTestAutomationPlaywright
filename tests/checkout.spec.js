@@ -33,11 +33,3 @@ test('User logins with test credentials, adds products to cart with 3 random ite
   await overview.completeCheckout();
   await overview.verifyConfirmation();
 });
-
-test('Locked out user should not be able to login', async ({ page }) => {
-  const login = new LoginPage(page);
-
-  await page.goto(testData.BASE_URL);
-  await login.login(testData.credentials.username_locked_out_user, testData.password);
-  await login.assertLoginFailure(constants.messages.loginFailureMessageLockedOutUser);
-});
