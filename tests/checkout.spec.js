@@ -1,6 +1,4 @@
 import { test } from '@playwright/test';
-const testData = require('../config/testData');
-const constants = require('../config/constants');
 import {
   LoginPage,
   ProductsPage,
@@ -8,6 +6,7 @@ import {
   CheckoutPage,
   CheckoutOverviewPage
 } from '../pages/index.js';
+const testData = require('../config/testData');
 
 test('User logins with test credentials, adds products to cart with 3 random items and checkouts', async ({ page }) => {
   const login = new LoginPage(page);
@@ -23,7 +22,9 @@ test('User logins with test credentials, adds products to cart with 3 random ite
   await products.addRandomItems(3);
   await products.goToCart();
 
+  await cart.verifyOnCartPage();
   await cart.proceedToCheckout();
+
   await checkout.fillCheckoutDetails(
     testData.customerCheckoutDetails.firstName,
     testData.customerCheckoutDetails.lastName,

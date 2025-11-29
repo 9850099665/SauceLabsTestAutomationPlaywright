@@ -1,12 +1,16 @@
 export class CheckoutPage {
   constructor(page) {
     this.page = page;
+    this.firstName = page.locator('//input[@id="first-name"]');
+    this.lastName = page.locator('//input[@id="last-name"]');
+    this.postalCode = page.locator('//input[@id="postal-code"]');
+    this.continueButton = page.locator('//input[@id="continue"]');
   }
 
-  async fillCheckoutDetails(first, last, zip) {
-    await this.page.fill('#first-name', first);
-    await this.page.fill('#last-name', last);
-    await this.page.fill('#postal-code', zip);
-    await this.page.click('#continue');
+  async fillCheckoutDetails(firstName, lastName, postalCode) {
+    await this.firstName.fill(firstName);
+    await this.lastName.fill(lastName);
+    await this.postalCode.fill(postalCode);
+    await this.continueButton.click();
   }
 }

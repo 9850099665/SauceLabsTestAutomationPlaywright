@@ -1,13 +1,14 @@
 export class ProductsPage {
   constructor(page) {
     this.page = page;
-    this.cartIcon = '.shopping_cart_link';
+    this.cartIcon = '//a[@class="shopping_cart_link"]';
     this.itemsLocator = page.locator('.inventory_item');
   }
 
   async addRandomItems(count) {
     const total = await this.itemsLocator.count();
     if (count > total) count = total;
+    console.log('this.itemsLocator :',this.itemsLocator)
 
     // generate unique random indices
     const indices = [];

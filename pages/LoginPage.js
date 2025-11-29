@@ -3,21 +3,21 @@ const { expect } = require('@playwright/test');
 export class LoginPage {
   constructor(page) {
     this.page = page;
-    this.username = '#user-name';
-    this.password = '#password';
-    this.loginBtn = '#login-button';
+    this.username = page.locator('//input[@id="user-name"]');
+    this.password = page.locator('//input[@id="password"]');
+    this.loginButton = page.locator('//input[@id="login-button"]');
+    this.productsPageTitle = page.locator('//span[@class="title"]');
   }
 
   async login(username, password) {
-    await this.page.fill(this.username, username);
-    await this.page.fill(this.password, password);
-    await this.page.click(this.loginBtn);
+    await this.username.fill(username);
+    await this.password.fill(password);
+    await this.loginButton.click();
   }
 
   //Validate successful login
   async verifyLoginSuccess() {
-    await this.page.waitForSelector('.title');  // Wait for Products page title
-    const title = await this.page.locator('.title').textContent();
-    expect(title).toBe('Products');
+    await expect(this.productsPageTitle).toBeVisible();
+    await expect(this.productsPageTitle).toHaveText('Products');
   }
 }
