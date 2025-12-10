@@ -30,8 +30,11 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    baseURL: "https://www.saucedemo.com/",
+    storageState: 'loginState.json',
     trace: 'on-first-retry',
   },
+  globalSetup: require.resolve('./tests/setup/login.setup.js'),
 
   /* Configure projects for major browsers */
   projects: [

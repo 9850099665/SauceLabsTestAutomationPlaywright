@@ -9,16 +9,12 @@ import {
 const testData = require('../config/testData');
 
 test('User logins with test credentials, adds products to cart with 3 random items and checkouts', async ({ page }) => {
-  const login = new LoginPage(page);
   const products = new ProductsPage(page);
   const cart = new CartPage(page);
   const checkout = new CheckoutPage(page);
   const overview = new CheckoutOverviewPage(page);
 
-  await page.goto(testData.BASE_URL);
-  await login.login(testData.credentials.username_standard_user, testData.password);
-  await login.verifyLoginSuccess();
-
+  await page.goto('/inventory.html');
   await products.addRandomItems(3);
   await products.goToCart();
 
